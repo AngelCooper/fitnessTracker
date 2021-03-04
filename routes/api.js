@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const db = require("../models/workout");
+const db = require("../models/workouts");
 
 //last exercise
 router.get("/api/workouts", async (req, res) => {
