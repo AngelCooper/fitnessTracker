@@ -13,3 +13,10 @@ router.get("/api/workouts", async (req, res) => {
     });
 });
 
+//new exercise 
+router.post("/api/workouts/:workout.id", (req, res) => {
+    const body = req.body;
+    const workoutId = req.params.workoutid;
+    console.log("body", body);
+    console
+})
