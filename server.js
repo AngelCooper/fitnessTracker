@@ -1,18 +1,32 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const logger = require("morgan");
 
 const PORT = process.env.PORT || 3000;
 
-const app = express;
+const app = express();
 
-app.request(express.urlencoded({ extended: true }));
-app.request(express.json());
+app.use(logger('dev'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.request(express.static("public"));
+app.use(express.static("public"));
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html')
+})
+app.get('/exercise', (req, res) => {
+    res.sendFile(__dirname + '/public/exercise.html')
+})
+app.get('/stats', (req, res) => {
+    res.sendFile(__dirname + '/public/stats.html')
+})
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fitness', {
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true, 
+    useUnifiedTopology: true
+
 });
 
 //routes 
