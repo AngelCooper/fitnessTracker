@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { Workout } = require("../models");
 const db = require("../models/workout");
 
 //last exercise
@@ -15,11 +14,11 @@ router.get("/api/workouts", async (req, res) => {
 });
 
 //new exercise 
-router.put("/api/workouts/:workout.id", (req, res) => {
+router.put("/api/workouts/:workoutid", (req, res) => {
     const body = req.body;
     const workoutId = req.params.workoutid;
     console.log("body", body);
-    console.log("id" + JSON.stringify(req.params));
+    console.log("id?" + JSON.stringify(req.params));
     db.Workout.findByIdAndUpdate(
         {_id: workoutId},{$push:{exercises: body}}
     ).then(dbExercise => {
